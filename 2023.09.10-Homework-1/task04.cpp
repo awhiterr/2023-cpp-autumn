@@ -7,5 +7,5 @@ int main(int argc, char* argv[]) {
 	int d = 9 - a;
 	int e = c + d;
 	std::cout << e;
-	return 0;
+	return EXIT_SUCCESS;
 }

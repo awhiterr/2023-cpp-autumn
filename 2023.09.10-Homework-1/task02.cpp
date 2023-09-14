@@ -9,5 +9,5 @@ int main(int argc, char* argv[]) {
     n = ((N - 1) / d) + 1;
     s = (1 + N) * n / 2;
     std::cout << s;
-    return 0;
+    return EXIT_SUCCESS;
 }

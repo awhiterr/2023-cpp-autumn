@@ -7,5 +7,5 @@ int main(int argc, char* argv[]) {
 	long long c = b + 1;
 	long long d = b * c * 100 + 25;
 	std::cout << d;
-	return 0;
+	return EXIT_SUCCESS;
 }
