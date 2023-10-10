@@ -1,21 +1,19 @@
-#include <iostream>
+#include<iostream>
+#include<cstdlib>
 
-int main(int argc, char**)
+int main(int argc, char** )
 {
 	int n = 0;
 	std::cin >> n;
 
 	int* m = (int*)malloc(sizeof(int) * n);
 
-	for (int i = 0; i < n; i++)
-	{
-		std::cin >> *(m + i);
-	}
-
 	int b = 0;
 
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; ++i)
 	{
+		std::cin >> *(m + i);
+
 		if (*(m + i) > 0)
 		{
 			b++;
@@ -23,6 +21,7 @@ int main(int argc, char**)
 		else
 		{
 			*(m + i) = 0;
+
 		}
 	}
 
@@ -30,17 +29,17 @@ int main(int argc, char**)
 
 	int j = 0;
 
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; ++i)
 	{
 		if (*(m + i) > 0)
 		{
 			*(m2 + j) = *(m + i);
-			std::cout << *(m2 + j) << " ";
+			std::cout << *(m2 + j);
 		}
-
 	}
 	free(m);
 	free(m2);
 
 	return EXIT_SUCCESS;
+
 }
