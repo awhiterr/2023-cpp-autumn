@@ -37,7 +37,6 @@ int main(int argc, char**)
 			*(m2 + j) = *(m + i);
 			std::cout << *(m2 + j) << " ";
 		}
-
 	}
 	free(m);
 	free(m2);
