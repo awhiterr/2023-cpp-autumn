@@ -6,23 +6,27 @@ private:
 	int _vertexes;
 	int _edges;
 	int** _matrix;
-	void initMatrix();
-	int* _arraydeg;
+	int* _lights;
+	int* _vertex_degree;
 public:
 	CGraph();
 	CGraph(int vertexes, int edges);
 	~CGraph();
 
 	void createMatrix(int vertexes, int edges);
-	void CountDegree(int vertexes);
-	void print_arraydeg();
 	void readMatrix(int vertexes);
 	void disposeMatrix();
+	void initMatrix();
+	void init_vertexes();
+	int* countDegrees();
+
+	void print_countDegrees();
+
 };
 CGraph::CGraph()
-	: _vertexes(0), _edges(0), _matrix(nullptr) {}
+	: _vertexes(0), _edges(0), _matrix(nullptr), _vertex_degree(nullptr), _lights (nullptr) {}
 
-CGraph::CGraph(int vertexes, int edges) : _vertexes(vertexes), _edges(edges), _matrix(nullptr), _arraydeg(nullptr)
+CGraph::CGraph(int vertexes, int edges) : _vertexes(vertexes), _edges(edges), _matrix(nullptr), _vertex_degree(nullptr), _lights(nullptr)
 {
 	initMatrix();
 }
@@ -40,11 +44,24 @@ void CGraph::initMatrix()
 	}
 }
 
+void CGraph::CGraph::init_vertexes()
+{
+	if (_vertexes == 0)
+	{
+		return;
+	}
+	_lights = new int [_vertexes];
+	for (int i = 0; i < _vertexes; ++i)
+	{
+		_lights[i] = 0;
+	}
+}
+
 void CGraph::createMatrix(int vertexes, int edges)
 {
-	_vertexes = vertexes;
+	_edges = edges;
 	initMatrix();
-	for (int i = 0; i < edges; ++i)
+	for (int i = 0; i < _edges; ++i)
 	{
 		int n = 0;
 		int m = 0;
@@ -55,33 +72,32 @@ void CGraph::createMatrix(int vertexes, int edges)
 	}
 }
 
-void CGraph::CountDegree(int vertexes)
+int* CGraph::countDegrees()
 {
-	int a = 0;
-
-	_arraydeg = new int[_vertexes] {0};
-	for (int i = 0; i < _vertexes; i++)
+	int* _vertex_degree = new int [_vertexes] {0};
+	for (int i = 0; i < _vertexes; ++i)
 	{
 		int count = 0;
-		for (int j = 0; j < _vertexes; j++)
+		for (int j = 0; j < _vertexes; ++j)
 		{
 			if (_matrix[i][j] == 1)
 			{
-				++count;
+				count++;
 			}
-
 		}
-		_arraydeg[i] = count;
+		_vertex_degree[i] = count;
 	}
+	return _vertex_degree;
 }
 
-	void CGraph::print_arraydeg()
+void CGraph::print_countDegrees()
+{
+	for (int i = 0; i < _vertexes; ++i)
 	{
-		for (int i = 0; i < _vertexes; ++i)
-		{
-			std::cout << _arraydeg[i];
-		}
+		std::cout << countDegrees()[i] << " ";
 	}
+	std::cout << std::endl;
+}
 
 	void CGraph::readMatrix(int vertexes)
 	{
@@ -112,6 +128,8 @@ void CGraph::CountDegree(int vertexes)
 	CGraph::~CGraph()
 	{
 		disposeMatrix();
+		delete[] _lights;
+		delete[] _vertex_degree;
 	}
 
 
@@ -120,9 +138,9 @@ int main(int argc, char* argv[])
 	int vertexes = 0;
 	int edges = 0;
 	std::cin >> vertexes;
-	std::cin >> edges;
 	CGraph graph(vertexes, edges);
 	graph.createMatrix(vertexes, edges);
+	graph.print_countDegrees();
 	return EXIT_SUCCESS;
 }
 
