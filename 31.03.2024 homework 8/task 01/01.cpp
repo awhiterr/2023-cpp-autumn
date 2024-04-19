@@ -14,17 +14,12 @@ public:
         : _vertexes(0), _edges(0), _matrix(nullptr)
     {}
 
-    CGraph(int vertexes)//??????????? ? ??????????
+    CGraph(int vertexes)
         : _vertexes(vertexes), _edges(0)
     {
         initMatrix();
     }
 
-    /* void setVertexes(int vertexes) { _vertexes = vertexes; }
-     int getVertexes() { return _vertexes; }
-
-     void setEdges(int edges) { _edges = edges; }
-     int getEdges() { return _edges; }*/
 
     void initMatrix()
     {
@@ -69,10 +64,10 @@ public:
                     ++count;
                 }
             }
-        }//setEdges count/2
+        }
         return count / 2;
     }
-    //print matrix
+ 
 
     void deleteMatrix()
     {
